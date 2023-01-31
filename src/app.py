@@ -19,7 +19,7 @@ if db_url is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace("postgres://", "postgresql://")
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 MIGRATE = Migrate(app, db)
 db.init_app(app)
@@ -65,7 +65,7 @@ def handle_personajes():
 @app.route('/personajes/<int:personajes_id>', methods=['GET'])
 def get_info_personajes(personajes_id):
     
-    user = Personajes.query.filter_by(id=personajes_id).first()
+    personajes = Personajes.query.filter_by(id=personajes_id).first()
     return jsonify(personajes.serialize()), 200
 
 
@@ -81,7 +81,7 @@ def handle_planetas():
 @app.route('/planetas/<int:planetas_id>', methods=['GET'])
 def get_info_planetas(planetas_id):
     
-    user = Planetas.query.filter_by(id=planetas_id).first()
+    planetas = Planetas.query.filter_by(id=planetas_id).first()
     return jsonify(planetas.serialize()), 200
 
 # POST PLANETAS
